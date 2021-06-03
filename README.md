@@ -33,6 +33,62 @@ Go to **bootstrap/app.php**, and add this in the specified key
 // Add provider 
 $app->register(Mawuekom\MacroSearch\MacroSearchServiceProvider::class);
 ```
+
+
+### Your model which inherits an eloquent model
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'posts';
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'post_id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'content'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [];
+}
+```
+
+### Use it to make search
+
+```php
+
+use App\Models\Post;
+
+Post::whereLike(['title', 'content'], 'Post title');
+
+```
+
 ### Once done, enjoy it
 
 ## Report bug
