@@ -1,10 +1,6 @@
-# Very short description of the package
+# Laravel macro that help make search on eloquent model
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mawuekom/laravel-macro-search.svg?style=flat-square)](https://packagist.org/packages/mawuekom/laravel-macro-search)
-[![Total Downloads](https://img.shields.io/packagist/dt/mawuekom/laravel-macro-search.svg?style=flat-square)](https://packagist.org/packages/mawuekom/laravel-macro-search)
-![GitHub Actions](https://github.com/mawuekom/laravel-macro-search/actions/workflows/main.yml/badge.svg)
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+This package is a macro service provider to make search on your eloquent model
 
 ## Installation
 
@@ -16,37 +12,33 @@ composer require mawuekom/laravel-macro-search
 
 ## Usage
 
+### Laravel
+
+Go to **config/app.php**, and add this in the providers key
+
+
 ```php
-// Usage description here
+'providers' => [
+    ...
+    Mawuekom\MacroSearch\MacroSearchServiceProvider::class,
+    ...
+]
 ```
 
-### Testing
+### Lumen
 
-```bash
-composer test
+Go to **bootstrap/app.php**, and add this in the specified key
+
+```php
+// Add provider 
+$app->register(Mawuekom\MacroSearch\MacroSearchServiceProvider::class);
 ```
+### Once done, enjoy it
 
-### Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-### Security
-
-If you discover any security related issues, please email seddorephraim7@gmail.com instead of using the issue tracker.
-
-## Credits
-
--   [Ephraïm Seddor](https://github.com/mawuekom)
--   [All Contributors](../../contributors)
+## Report bug
+Contact me on Twitter [@ephraimseddor](https://twitter.com/ephraimseddor)
 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
