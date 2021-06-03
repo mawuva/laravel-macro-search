@@ -2,7 +2,9 @@
 
 namespace Mawuekom\MacroSearch;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Builder;
 
 class MacroSearchServiceProvider extends ServiceProvider
 {
@@ -11,37 +13,16 @@ class MacroSearchServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*
-         * Optional methods to load your package assets
-         */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'laravel-macro-search');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-macro-search');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
-
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('laravel-macro-search.php'),
-            ], 'config');
-
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-macro-search'),
-            ], 'views');*/
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/laravel-macro-search'),
-            ], 'assets');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/laravel-macro-search'),
-            ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
-        }
+        // Builder macro search
+        Builder::macro('whereLike', function ($attributes, string $searchTerm) {
+            $this ->where(function (Builder $query) use ($attributes, $searchTerm) {
+                foreach (Arr::wrap($attributes) as $attribute) {
+                    $query ->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
+                }
+            });
+        
+            return $this;
+        });
     }
 
     /**
@@ -49,12 +30,6 @@ class MacroSearchServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-macro-search');
-
-        // Register the main class to use with the facade
-        $this->app->singleton('laravel-macro-search', function () {
-            return new MacroSearch;
-        });
+        
     }
 }
