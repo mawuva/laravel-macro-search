@@ -5,7 +5,7 @@
         "mawuekom", "laravel", "macro", "laravel-macro",
         "laravel-macro-search", "macro-search"
     ],
-    "homepage": "https://packagist.org/packages/mawuekom/laravel-macro-search",
+    "homepage": "https://packagist.org/packages/mawuva/laravel-macro-search",
     "license": "MIT",
     "type": "library",
     "authors": [
